@@ -9,6 +9,10 @@ const btnAddElem = $.querySelector('.btn-add')
 const inputTitleElem = $.querySelector('.input-title')
 const inputDescElem = $.querySelector('.input-desc')
 const closeModalElem = $.querySelector('.close-modal')
+const btnEditElem = $.querySelector('.btn-edit')
+const btnDeleteElem = $.querySelector('.btn-delete')
+const noteElem = $.querySelector('.note')
+
 
 let isMenu = false
 const menuHandler = () => {
@@ -26,11 +30,39 @@ const openModal = () => {
         overlayElem.style.display = "flex"
 
     }
+
+const setLocalStorage = (notesList) => {
+    localStorage.setItem('notes', JSON.stringify(notesList))
+}
+
+function getLocalStorage () {
+    let localStorageNotes = JSON.parse(localStorage.getItem('notes'))
+
+    if (localStorageNotes) {
+        notesArray = localStorageNotes
+    } else {
+        notesArray = []
+    }
+
+    addNewNote(notesArray)
+}
     
+let notesArray = []
 const addNewNote = () => {
     const inputTitle = inputTitleElem.value.trim()
     const inputDesc = inputDescElem.value.trim()
     const currentData = new Date()
+
+    let newNoteObj = {
+        id: notesArray.length + 1,
+        title: inputTitle,
+        desc: inputDesc
+    }
+
+    notesArray.push(newNoteObj)
+    setLocalStorage(notesArray)
+    // addNewNote(notesArray)
+
 
     let addNewNoteBox = `<div class="box">
             <div class="head-box">
@@ -63,7 +95,12 @@ const closeModal = () => {
     overlayElem.style.display = "none"
 }
 
+const deleteFromDom = () => {
+    // noteElem. = "none"
+}
+
 iconElemHandle.addEventListener('click', menuHandler)
 addNewElemHandle.addEventListener('click', openModal)
 btnAddElem.addEventListener('click', addNewNote)
 closeModalElem.addEventListener('click', closeModal)
+btnDeleteElem.addEventListener('click', deleteFromDom)
