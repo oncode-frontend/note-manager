@@ -109,3 +109,88 @@ h1{
         grid-template-columns: auto;
     }
 }
+
+.modal{
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box{
+    padding: 50px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #eee;
+    border-radius: 10px;
+    z-index: 2;
+    gap: 30px;
+}
+
+.head-modal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.head-modal img{
+    cursor: pointer;
+}
+
+.content-modal{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.content-modal input{
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.content-modal .title-section input{
+    height: 30px;
+}
+
+.content-modal .desc-section input{
+    height: 60px;
+}
+
+.btn-add{
+    width: 100%;
+}
+
+button{
+    background-color: #ccc;
+    border-radius: 5px;
+    border: none;
+    height: 30px;
+    font-family: cursive;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover{
+    background-color: #bbb;
+}
+
+.overlay{
+    display: none;
+    min-height: 100vh;
+    background-color: #000000a2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
