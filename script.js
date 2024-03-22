@@ -27,10 +27,14 @@ const openModal = () => {
     }
     
 const addNewNote = () => {
+    const inputTitle = inputTitleElem.value
+    const inputDesc = inputDescElem.value
+
+    
     let addNewNoteBox = `<div class="box">
             <div class="head-box">
-                <h2>Learn Js</h2>
-                <p>I'll learn js from w3school</p>
+                <h2>${inputTitle}</h2>
+                <p>${inputDesc}</p>
             </div>
             <div class="foot-box">
                 <p class="date">April 12, 2024</p>
