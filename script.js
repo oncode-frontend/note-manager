@@ -8,6 +8,7 @@ const overlayElem = $.querySelector('.overlay')
 const btnAddElem = $.querySelector('.btn-add')
 const inputTitleElem = $.querySelector('.input-title')
 const inputDescElem = $.querySelector('.input-desc')
+const closeModalElem = $.querySelector('.close-modal')
 
 let isMenu = false
 const menuHandler = () => {
@@ -27,8 +28,8 @@ const openModal = () => {
     }
     
 const addNewNote = () => {
-    const inputTitle = inputTitleElem.value
-    const inputDesc = inputDescElem.value
+    const inputTitle = inputTitleElem.value.trim()
+    const inputDesc = inputDescElem.value.trim()
     const currentData = new Date()
 
     let addNewNoteBox = `<div class="box">
@@ -57,6 +58,12 @@ const addNewNote = () => {
     overlayElem.style.display = "none"
 }
 
+const closeModal = () => {
+    modalElem.style.display = "none"
+    overlayElem.style.display = "none"
+}
+
 iconElemHandle.addEventListener('click', menuHandler)
 addNewElemHandle.addEventListener('click', openModal)
 btnAddElem.addEventListener('click', addNewNote)
+closeModalElem.addEventListener('click', closeModal)
