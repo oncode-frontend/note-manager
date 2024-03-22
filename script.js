@@ -3,10 +3,13 @@ const containerElem = $.querySelector('.container')
 const addNewElemHandle = $.querySelector('.add-new-note')
 const iconElemHandle = $.querySelector('.menu-svg')
 const menuElemHandle = $.querySelector('.menu-extend')
-
+const modalElem = $.querySelector('.modal')
+const overlayElem = $.querySelector('.overlay')
+const btnAddElem = $.querySelector('.btn-add')
+const inputTitleElem = $.querySelector('.input-title')
+const inputDescElem = $.querySelector('.input-desc')
 
 let isMenu = false
-
 const menuHandler = () => {
     if (!isMenu) {
         menuElemHandle.style.display = "flex"
@@ -17,6 +20,12 @@ const menuHandler = () => {
     }
 }
 
+const openModal = () => {
+        modalElem.style.display = "flex"
+        overlayElem.style.display = "flex"
+
+    }
+    
 const addNewNote = () => {
     let addNewNoteBox = `<div class="box">
             <div class="head-box">
@@ -39,8 +48,11 @@ const addNewNote = () => {
             </div>
         </div>`
 
-        containerElem.insertAdjacentHTML("beforeend" ,addNewNoteBox)
+    containerElem.insertAdjacentHTML("beforeend" ,addNewNoteBox)
+    modalElem.style.display = "none"
+    overlayElem.style.display = "none"
 }
 
 iconElemHandle.addEventListener('click', menuHandler)
-addNewElemHandle.addEventListener('click', addNewNote)
+addNewElemHandle.addEventListener('click', openModal)
+btnAddElem.addEventListener('click', addNewNote)
