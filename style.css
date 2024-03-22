@@ -1,0 +1,43 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: cursive;
+    background-color: #fff;
+}
+
+h1{
+    text-align: center;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 5px;
+}
+
+
+.container .box{
+    width: 300px;
+    height: 244px;
+    border-radius: 10px;
+    margin: 20px 30px;
+    background-color: #eee;
+    padding: 10px 20px;
+}
+
+.container .add-new-note{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.container .add-new-note:hover img{
+    animation: rubberBand;
+    animation-duration: 0.5s;
+}
