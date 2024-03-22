@@ -19,10 +19,14 @@ h1{
     grid-gap: 5px;
 }
 
+.flex{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .container .box{
-    width: 300px;
-    height: 244px;
     border-radius: 10px;
     margin: 20px 30px;
     background-color: #eee;
@@ -46,9 +50,14 @@ h1{
     animation-duration: 0.5s;
 }
 
+.head-box{
+    margin: 0 0 50px 0;
+}
+
 .head-box h2, p{
     margin: 10px 0;
 }
+
 
 .foot-box{
     position: relative;
@@ -64,15 +73,39 @@ h1{
 }
 
 .foot-box .menu-extend{
+    width: 100px;
     position: absolute;
     right: 40px;
     bottom: 20px;
-    display: flex;
+    display: none;
     background-color: #ccc;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: 5px;
-    padding: 5px;
-    
+    cursor: pointer;
+    box-shadow: 0px 11px 29px 0px rgba(0,0,0,0.1);
+}
+
+.foot-box .menu-extend .btn-edit, .btn-delete{
+    padding: 2px 0;
+    padding: 10px;
+}
+
+.foot-box .menu-extend .btn-edit:hover, .btn-delete:hover{
+    background-color: #fff;
+}
+
+.foot-box .menu-extend .btn-edit:hover{
+    border-radius: 5px 5px 0 0;
+}
+
+.foot-box .menu-extend .btn-delete:hover{
+    border-radius: 0 0 5px 5px;
+}
+
+@media screen and (max-width: 1000px) {
+    .container{
+        grid-template-columns: auto;
+    }
 }
