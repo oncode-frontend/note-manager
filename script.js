@@ -29,15 +29,15 @@ const openModal = () => {
 const addNewNote = () => {
     const inputTitle = inputTitleElem.value
     const inputDesc = inputDescElem.value
+    const currentData = new Date()
 
-    
     let addNewNoteBox = `<div class="box">
             <div class="head-box">
                 <h2>${inputTitle}</h2>
                 <p>${inputDesc}</p>
             </div>
             <div class="foot-box">
-                <p class="date">April 12, 2024</p>
+                <p class="date">${currentData.toLocaleString('default', {month: 'long'}) + ' ' + currentData.getDate() + ', ' + currentData.getFullYear()}</p>
                 <img class="menu-svg" src="assets/ellipsis-solid.svg" width="40px" alt="menu-icon">
                 <div class="menu-extend">
                     <span class="flex btn-edit">
