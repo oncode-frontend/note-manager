@@ -64,7 +64,7 @@ const addNewNote = () => {
     // addNewNote(notesArray)
 
 
-    let addNewNoteBox = `<div class="box">
+    let addNewNoteBox = `<div class="box note">
             <div class="head-box">
                 <h2>${inputTitle}</h2>
                 <p>${inputDesc}</p>
@@ -101,7 +101,7 @@ const closeModal = () => {
 }
 
 const deleteFromDom = () => {
-    // noteElem. = "none"
+    noteElem.style.display = "none"
 }
 
 iconElemHandle.addEventListener('click', menuHandler)
