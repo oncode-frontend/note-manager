@@ -85,9 +85,14 @@ const addNewNote = () => {
             </div>
         </div>`
 
-    containerElem.insertAdjacentHTML("beforeend" ,addNewNoteBox)
     modalElem.style.display = "none"
     overlayElem.style.display = "none"
+        
+    if (inputTitleElem.value === "" && inputDescElem.value === "") {
+        return
+    } else {
+        containerElem.insertAdjacentHTML("beforeend" ,addNewNoteBox)
+    }
 }
 
 const closeModal = () => {
