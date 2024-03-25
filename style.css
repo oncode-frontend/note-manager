@@ -77,7 +77,6 @@ h1{
     position: absolute;
     right: 40px;
     bottom: 20px;
-    display: none;
     background-color: #ccc;
     justify-content: center;
     align-items: center;
@@ -85,6 +84,7 @@ h1{
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0px 11px 29px 0px rgba(0,0,0,0.1);
+    display: none;
 }
 
 .foot-box .menu-extend .btn-edit, .btn-delete{
@@ -114,6 +114,11 @@ h1{
     display: none;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 .modal-box{
