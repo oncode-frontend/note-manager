@@ -87,6 +87,10 @@ h1{
     display: none;
 }
 
+.foot-box .menu-extend.show{
+    display: flex;
+}
+
 .foot-box .menu-extend .btn-edit, .btn-delete{
     padding: 2px 0;
     padding: 10px;
