@@ -76,7 +76,11 @@ const generateNotes = (notes) => {
 }
 
 const showMenu = (el) => {
-    el.nextElementSibling.classList.add("show")
+    if (el.nextElementSibling.classList[1] === "show") {
+        el.nextElementSibling.classList.remove("show")
+    } else {
+        el.nextElementSibling.classList.add("show")
+    }
 }
 
 const getLocalStorage = () => {
