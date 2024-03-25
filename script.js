@@ -50,7 +50,7 @@ const generateNotes = (notes) => {
             </div>
             <div class="foot-box">
                 <p class="date">${note.date}</p>
-                <img class="menu-svg" src="assets/ellipsis-solid.svg" width="40px" alt="menu-icon">
+                <img class="menu-svg" onclick="showMenu(this)" src="assets/ellipsis-solid.svg" width="40px" alt="menu-icon">
                 <div class="menu-extend">
                     <span class="flex btn-edit">
                         <img src="./assets/pen-solid.svg" width="15px" alt="">
@@ -73,6 +73,10 @@ const generateNotes = (notes) => {
         noteTitle.textContent = "Add a New Note"
         noteButton.textContent = "Add Note"
     }
+}
+
+const showMenu = (el) => {
+    el.nextElementSibling.classList.add("show")
 }
 
 const getLocalStorage = () => {
