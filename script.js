@@ -1,8 +1,6 @@
 const $ = document
 const containerElem = $.querySelector('.container'),
 addNewElemHandle = $.querySelector('.add-new-note'),
-iconElemHandle = $.querySelector('.menu-svg'),
-menuElemHandle = $.querySelector('.menu-extend'),
 modalElem = $.querySelector('.modal'),
 overlayElem = $.querySelector('.overlay'),
 btnAddElem = $.querySelector('.btn-add'),
@@ -16,18 +14,7 @@ noteTitle = $.querySelector('.note-title'),
 noteButton = $.querySelector('.note-button');
 
 let isUpdate = false
-let isMenu = false
 let notesArray = []
-
-// const menuHandler = () => {
-//     if (!isMenu) {
-//         menuElemHandle.style.display = "flex"
-//         isMenu = true
-//     } else{
-//         menuElemHandle.style.display = "none"
-//         isMenu = false
-//     }
-// }
 
 const openModal = () => {
     modalElem.style.display = "flex"
@@ -41,7 +28,7 @@ const generateNotes = (notes) => {
     modalElem.style.display = "none"
     overlayElem.style.display = "none"
         
-    
+    $.querySelectorAll('.note').forEach(note => note.remove())
     
     notes.forEach(note => { containerElem.insertAdjacentHTML("beforeend" ,`<div class="box note">
             <div class="head-box">
@@ -110,6 +97,11 @@ const closeModal = () => {
     overlayElem.style.display = "none"
 }
 
+const clearInput = () => {
+    inputTitleElem.value = ""
+    inputDescElem.value = ""
+}
+
 const deleteFromDom = () => {
     noteElem.style.display = "none"
 }
@@ -121,18 +113,22 @@ window.addEventListener('keyup', event => {
 })
 
 btnAddElem.addEventListener('click', () => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const currentData = new Date()
     let newNoteObj = {
         id: notesArray.length + 1,
         title: inputTitleElem.value.trim(),
         desc: inputDescElem.value.trim(),
-        date: currentData.toLocaleString('default', {month: 'long'}) + ' ' + currentData.getDate() + ', ' + currentData.getFullYear()
+        date: currentData.toLocaleString('default', {month: 'long'}) 
+        + ' ' + currentData.getDate() + ', ' 
+        + currentData.getFullYear() + ' '
+        + '('+ days[currentData.getDay()] +')'
     }
 
     notesArray.push(newNoteObj)
     setLocalStorage(notesArray)
     generateNotes(notesArray)
+    clearInput()
 })
 addNewElemHandle.addEventListener('click', openModal)
 closeModalElem.addEventListener('click', closeModal)
-// btnDeleteElem.addEventListener('click', deleteFromDom)
