@@ -32,7 +32,6 @@ const openModal = (noteId, editnoteTitle, editnoteDesc) => {
         inputTitleElem.placeholder = "enter title"
         inputDescElem.placeholder = "enter description"
     }
-    
     inputTitleElem.focus()
 }
 
