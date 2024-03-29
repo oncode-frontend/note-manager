@@ -14,13 +14,26 @@ noteTitle = $.querySelector('.note-title'),
 noteButton = $.querySelector('.note-button');
 
 let isUpdate = false
+let updateId = null
 let notesArray = []
 
-const openModal = () => {
+const openModal = (noteId, editnoteTitle, editnoteDesc) => {
     modalElem.style.display = "flex"
     overlayElem.style.display = "flex"
+    
+    if (isUpdate) {
+        noteTitle.textContent = "Update Note"
+        noteButton.textContent = "Update Note"
+        inputTitleElem.value = editnoteTitle
+        inputDescElem.value = editnoteDesc
+    }else{
+        noteTitle.textContent = "Add a New Note"
+        noteButton.textContent = "Add Note"
+        inputTitleElem.placeholder = "enter title"
+        inputDescElem.placeholder = "enter description"
+    }
+    
     inputTitleElem.focus()
-
 }
 
 const generateNotes = (notes) => {
@@ -39,7 +52,7 @@ const generateNotes = (notes) => {
                 <p class="date">${note.date}</p>
                 <img class="menu-svg" onclick="showMenu(this)" src="assets/ellipsis-solid.svg" width="40px" alt="menu-icon">
                 <div class="menu-extend">
-                    <span class="flex btn-edit">
+                    <span onclick="editNoteFromDom(${index}, '${note.title}', '${note.desc}')" class="flex btn-edit">
                         <img src="./assets/pen-solid.svg" width="15px" alt="">
                         <h4>Edit</h4>
                     </span>
@@ -53,13 +66,6 @@ const generateNotes = (notes) => {
         )
     })
 
-    if (isUpdate) {
-        noteTitle.textContent = "Update Note"
-        noteButton.textContent = "Update Note"
-    }else{
-        noteTitle.textContent = "Add a New Note"
-        noteButton.textContent = "Add Note"
-    }
 }
 
 const showMenu = (el) => {
@@ -102,6 +108,12 @@ const clearInput = () => {
     inputDescElem.value = ""
 }
 
+const editNoteFromDom = (noteId, noteTitle, noteDesc) => {
+    isUpdate = true
+    openModal(noteId, noteTitle, noteDesc)
+    updateId = noteId
+}
+
 const deleteNoteFromDom = (noteIndex) => {
 
     let deleted = confirm("Are you sure to delete note?")
@@ -112,8 +124,6 @@ const deleteNoteFromDom = (noteIndex) => {
         setLocalStorage(localNotes)
         generateNotes(localNotes)
     }
-
-
 }
 
 window.addEventListener('keyup', event => {
@@ -125,20 +135,42 @@ window.addEventListener('keyup', event => {
 btnAddElem.addEventListener('click', () => {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const currentData = new Date()
-    let newNoteObj = {
-        id: notesArray.length + 1,
-        title: inputTitleElem.value.trim(),
-        desc: inputDescElem.value.trim(),
-        date: currentData.toLocaleString('default', {month: 'long'}) 
-        + ' ' + currentData.getDate() + ', ' 
-        + currentData.getFullYear() + ' '
-        + '('+ days[currentData.getDay()] +')'
-    }
+    
+    if (isUpdate) {
+        let allNotes = getLocalStorage()
 
-    notesArray.push(newNoteObj)
-    setLocalStorage(notesArray)
-    generateNotes(notesArray)
-    clearInput()
+        allNotes.some((note, index) => {
+            if (index === updateId) {
+                note.title = inputTitleElem.value
+                note.desc = inputDescElem.value
+            }
+        })
+
+        setLocalStorage(allNotes)
+        generateNotes(allNotes)
+        closeModal()
+        clearInput()
+        
+        isUpdate = false
+
+    } else {
+        let newNoteObj = {
+                id: notesArray.length + 1,
+                title: inputTitleElem.value.trim(),
+                desc: inputDescElem.value.trim(),
+                date: currentData.toLocaleString('default', {month: 'long'}) 
+                + ' ' + currentData.getDate() + ', ' 
+                + currentData.getFullYear() + ' '
+                + '('+ days[currentData.getDay()] +')'
+        }
+
+        notesArray.push(newNoteObj)
+        setLocalStorage(notesArray)
+        generateNotes(notesArray)
+        clearInput()
+    }
+    
+    
 })
 addNewElemHandle.addEventListener('click', openModal)
 closeModalElem.addEventListener('click', closeModal)
