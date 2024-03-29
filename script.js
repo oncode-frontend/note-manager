@@ -146,12 +146,10 @@ btnAddElem.addEventListener('click', () => {
                 note.desc = inputDescElem.value
             }
         })
-
         setLocalStorage(allNotes)
         generateNotes(allNotes)
         closeModal()
         clearInput()
-
         isUpdate = false
 
     } else {
@@ -164,14 +162,11 @@ btnAddElem.addEventListener('click', () => {
                 + currentData.getFullYear() + ' '
                 + '('+ days[currentData.getDay()] +')'
         }
-
         notesArray.push(newNoteObj)
         setLocalStorage(notesArray)
         generateNotes(notesArray)
         clearInput()
     }
-    
-    
 })
 addNewElemHandle.addEventListener('click', openModal)
 closeModalElem.addEventListener('click', closeModal)
