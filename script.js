@@ -69,11 +69,12 @@ const generateNotes = (notes) => {
 }
 
 const showMenu = (el) => {
-    if (el.nextElementSibling.classList[1] === "show") {
-        el.nextElementSibling.classList.remove("show")
-    } else {
-        el.nextElementSibling.classList.add("show")
-    }
+    el.nextElementSibling.classList.add("show")
+    $.addEventListener('click', ev => {
+        if (ev.target !== el) {
+            el.nextElementSibling.classList.remove("show")
+        }
+    })
 }
 
 const getLocalStorage = () => {
@@ -150,7 +151,7 @@ btnAddElem.addEventListener('click', () => {
         generateNotes(allNotes)
         closeModal()
         clearInput()
-        
+
         isUpdate = false
 
     } else {
