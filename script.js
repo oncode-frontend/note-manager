@@ -30,7 +30,7 @@ const generateNotes = (notes) => {
         
     $.querySelectorAll('.note').forEach(note => note.remove())
     
-    notes.forEach(note => { containerElem.insertAdjacentHTML("beforeend" ,`<div class="box note">
+    notes.forEach((note, index) => { containerElem.insertAdjacentHTML("beforeend" ,`<div class="box note">
             <div class="head-box">
                 <h2>${note.title}</h2>
                 <p>${note.desc}</p>
@@ -43,7 +43,7 @@ const generateNotes = (notes) => {
                         <img src="./assets/pen-solid.svg" width="15px" alt="">
                         <h4>Edit</h4>
                     </span>
-                    <span class="flex btn-delete">
+                    <span onclick="deleteNoteFromDom(${index})" class="flex btn-delete">
                         <img src="./assets/trash-solid.svg" width="15px" alt="">
                         <h4>Delete</h4>
                     </span>
@@ -102,8 +102,18 @@ const clearInput = () => {
     inputDescElem.value = ""
 }
 
-const deleteFromDom = () => {
-    noteElem.style.display = "none"
+const deleteNoteFromDom = (noteIndex) => {
+
+    let deleted = confirm("Are you sure to delete note?")
+
+    if (deleted) {
+        let localNotes = getLocalStorage()
+        localNotes.splice(noteIndex, 1)
+        setLocalStorage(localNotes)
+        generateNotes(localNotes)
+    }
+
+
 }
 
 window.addEventListener('keyup', event => {
